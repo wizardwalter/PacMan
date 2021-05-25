@@ -1,8 +1,9 @@
 let pos = 0;
-// const pacArray = [
-//   ['./images/PacMan1.png', './images/PacMan2.png'],
-//   ['./images/PacMan3.png', './images/PacMan4.png'],
-// ];
+const pacArray1 = 
+  ['./images/PacMan1.png', './images/PacMan2.png']
+;
+const pacArray2 =
+  ['./images/PacMan3.png', './images/PacMan4.png']
 let direction = 0;
 var pacMen = [];
 
@@ -36,6 +37,7 @@ function makePac() {
 
 function update() {
   pacMen.forEach((item) => {
+    chomp(item);
     checkCollisions(item);
     item.position.x += item.velocity.x;
     item.position.y += item.velocity.y;
@@ -45,6 +47,20 @@ function update() {
   });
   setTimeout(update, 20);
 }
+
+function chomp(item){
+  pacMen.forEach(item =>{
+    if(item.velocity.x > 0){
+      setTimeout(function(){item.newimg.src = './images/PacMan1.png'}, 100);
+      setTimeout(function(){item.newimg.src = './images/PacMan2.png'}, 50);
+    } else if(item.velocity.x < 0){
+      setTimeout(function(){item.newimg.src = './images/PacMan3.png'}, 100);
+      setTimeout(function(){item.newimg.src = './images/PacMan4.png'}, 50);
+    }
+    }
+  )
+};
+
 
 function checkCollisions(item) {
   if(item.position.x <= 0 || item.position.x >= (window.innerWidth - item.newimg.width)){
